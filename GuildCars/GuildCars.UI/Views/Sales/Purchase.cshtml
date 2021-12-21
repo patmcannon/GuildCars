@@ -1,0 +1,58 @@
+﻿
+@model GuildCars.Models.ViewModels.VehiclePurchaseDetailVM
+
+@{
+    ViewBag.Title = "Purchase Details";
+}
+
+<h2>Purchase Vehicle</h2>
+
+@Html.Partial("_VehicleDetailPartial", Model.VehicleDetail)
+
+<h2>Sales Information</h2>
+
+@using (Html.BeginForm())
+{
+    <label class="control-label col-md-6 col-sm-12" for="CustomerFirstName">
+        First Name:
+    </label>
+    @Html.TextBoxFor(x => x.Purchase.CustomerFirstName)
+    <label class="control-label col-md-6 col-sm-12" for="CustomerLastName">
+        Last Name:
+    </label>
+    @Html.TextBoxFor(x => x.Purchase.CustomerLastName)
+    <label class="control-label col-md-6 col-sm-12" for="CustomerEmail">
+        Email:
+    </label>
+    @Html.TextBoxFor(x => x.Purchase.CustomerEmail)
+    <label class="control-label col-md-6 col-sm-12" for="CustomerPhone">
+        Phone:
+    </label>
+    @Html.TextBoxFor(x => x.Purchase.CustomerPhone)
+    <label class="control-label col-md-12" for="StreetAddress">
+        Street:
+    </label>
+    @Html.TextBoxFor(x => x.Purchase.StreetAddress)
+    <label class="control-label col-md-12" for="City">
+        City:
+    </label>
+    @Html.TextBoxFor(x => x.Purchase.City)
+    <label class="control-label col-md-12" for="StateAbbr">
+        State:
+    </label>
+    @Html.TextBoxFor(x => x.Purchase.StateAbbr)
+    <label class="control-label col-md-12" for="Zipcode">
+        Zipcode:
+    </label>
+
+
+    <hr class="my-5">
+
+
+    <div class="row">
+        <button type="submit" class="btn btn-outline-primary">
+            Post
+        </button>
+        @Html.ActionLink("Cancel", "Index", "Home", null, new { @class = "btn btn-outline-primary" })
+    </div>
+}

@@ -1,0 +1,110 @@
+﻿@model List<GuildCars.Models.Queries.VehicleDetail>
+@{
+    ViewBag.Title = "Inventory Used Results";
+}
+
+<h2>Used Inventory</h2>
+
+<div class="col-12 mw-100 d-inline-block border border-primary p-3 text-secondary" style="margin-top:10px">
+    <h5>Quick Search</h5>
+    <form id="searchForm" class="form-group form-inline row">
+        <div class="col-md-4">
+            <label class="sr-only" for="quickSearchTextbox">Quick Search</label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="quickSearchTextbox" placeholder="Enter make, model, or year">
+        </div>
+
+        <div class="col-md-4 form-group">
+            <label for="Price" class="form-inline">Price </label>
+            <input type="text" class="form-control mb-2 mr-sm-2 w-25" id="minPrice" placeholder="No Min">
+            <input type="text" class="form-control mb-2 mr-sm-2 w-25" id="maxPrice" placeholder="No Max">
+        </div>
+        <div class="col-md-4 form-group">
+            <label for="Year">Year </label>
+            <input type="text" class="form-control mb-2 mr-sm-2 w-25" id="minYear" placeholder="No Min">
+            <input type="text" class="form-control mb-2 mr-sm-2 w-25" id="maxYear" placeholder="No Max">
+        </div>
+    </form>
+    <button type="submit" onclick="search()" class="btn btn-outline-primary">Search</button>
+</div>
+
+<h2>Search Results</h2>
+
+<div id="searchResults">
+    @*@foreach (var vehicle in Model)
+    {
+        @Html.Partial("_VehicleDetailPartial", vehicle)
+    }*@
+</div>
+
+@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $("#searchForm").submit(function (e) {
+                search();
+                return false;
+            });
+        });
+
+        function search() {
+            var parameters;
+            var imagePath = @Url.Content("~/images/");
+            var detailsPath = '@Url.Action("Details", "Inventory")';
+
+            parameters = 'minPrice=' + $('#minPrice').val() + '&' + 'maxPrice=' + $('#maxPrice').val() + '&' + 'quickSearch=' +
+                $('#quickSearchTextbox').val() + '&' + 'minYear=' + $('#minYear').val() + '&' + 'maxYear=' + $('#maxYear').val() + '&isNew=false';
+
+            $.ajax({
+                type: 'GET',
+                url: '/api/vehicles/search?' + parameters,
+                success: function (results) {
+                    $('#searchResults').empty();
+                    //add search results
+                    $.each(results, function (index, vehicle) {
+                        var html = '<div class="row border rounded" style="margin-bottom:10px">' +
+                            '<div class="col-xs-12 col-sm-12 col-md-3">' +
+                            '<h4>' + vehicle.ModelYear + ' ' + vehicle.MakeName + ' ' + vehicle.ModelName + '</h4>' +
+                            '<p><img src="' + imagePath + vehicle.ImageFileName + '" /></p>' +
+                            '</div>' +
+                            '<div class="col-xs-12 col-sm-12 col-md-9">' +
+                            '<table>' +
+                            '<tbody>' +
+                            '<tr>' +
+                            '<td><strong>Body  Style: </strong></td>' +
+                            '<td>' + vehicle.BodyTypeName + '</td>' +
+                            '<td><strong>Interior: </strong></td>' +
+                            '<td>' + vehicle.InteriorColorName + '</td>' +
+                            '<td><strong>Sale Price: </strong></td>' +
+                            '<td>$' + vehicle.SalePrice + '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<td><strong>Manual: </strong></td>' +
+                            '<td>' + vehicle.IsManual + '</td>' +
+                            '<td><strong>Mileage: </strong></td>' +
+                            '<td>' + vehicle.Mileage + '</td>' +
+                            '<td><strong>MSRP: </strong></td>' +
+                            '<td>$ ' + vehicle.RetailPrice + '</td>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<td><strong>Color: </strong></td>' +
+                            '<td>' + vehicle.ExteriorColorName + '</td>' +
+                            '<td><strong>VIN #: </strong></td>' +
+                            '<td>' + vehicle.VIN + '</td>' +
+                            '</tr>' +
+                            '</tbody>' +
+                            '</table>' +
+                            '<a href="' + detailsPath + "?vin=" + vehicle.VIN + '" class="btn btn-outline-secondary float-right align-baseline">Details</a>' +
+                            //'<button type="button" onclick="location.href="/Inventory/Details/?vin=' +vehicle.VIN +'" class="btn btn-outline-secondary float-right align-baseline">Details</button>' +
+                            '</div>' +
+                            '</div>';
+
+                        $('#searchResults').append(html.toString());
+                    });
+                },
+                error: function () {
+                    alert('Error performing search, try again later!')
+                }
+            });
+        }
+    </script>
+}

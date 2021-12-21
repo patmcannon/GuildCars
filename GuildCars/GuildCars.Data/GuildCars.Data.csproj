@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D9142843-53D5-4AAE-A7A8-E261AB556555}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GuildCars.Data</RootNamespace>
+    <AssemblyName>GuildCars.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ADO\BodyTypeRepositoryADO.cs" />
+    <Compile Include="ADO\ContactRepositoryADO.cs" />
+    <Compile Include="ADO\ExteriorColorRepositoryADO.cs" />
+    <Compile Include="ADO\InteriorColorRepositoryADO.cs" />
+    <Compile Include="ADO\MakeRepositoryADO.cs" />
+    <Compile Include="ADO\ModelRepositoryADO.cs" />
+    <Compile Include="ADO\PurchaseRepositoryADO.cs" />
+    <Compile Include="ADO\PurchaseTypeRepositoryADO.cs" />
+    <Compile Include="ADO\SpecialRepositoryADO.cs" />
+    <Compile Include="ADO\StateRepositoryADO.cs" />
+    <Compile Include="ADO\VehicleRepositoryADO.cs" />
+    <Compile Include="Factories\BodyTypeRepositoryFactory.cs" />
+    <Compile Include="Factories\ContactRepositoryFactory.cs" />
+    <Compile Include="Factories\ExteriorColorRepositoryFactory.cs" />
+    <Compile Include="Factories\InteriorColorRepositoryFactory.cs" />
+    <Compile Include="Factories\MakeRepositoryFactory.cs" />
+    <Compile Include="Factories\ModelRepositoryFactory.cs" />
+    <Compile Include="Factories\SpecialRepositoryFactory.cs" />
+    <Compile Include="Factories\VehicleRepositoryFactory.cs" />
+    <Compile Include="Interfaces\IBodyTypeRepository.cs" />
+    <Compile Include="Interfaces\IContactRepository.cs" />
+    <Compile Include="Interfaces\IExteriorColorRepository.cs" />
+    <Compile Include="Interfaces\IInteriorColorRepository.cs" />
+    <Compile Include="Interfaces\IMakeRepository.cs" />
+    <Compile Include="Interfaces\IModelRepository.cs" />
+    <Compile Include="Interfaces\IPurchaseRepository.cs" />
+    <Compile Include="Interfaces\IPurchaseTypeRepository.cs" />
+    <Compile Include="Interfaces\ISpecialRepository.cs" />
+    <Compile Include="Interfaces\IStateRepository.cs" />
+    <Compile Include="Interfaces\IVehicleRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GuildCars.Models\GuildCars.Models.csproj">
+      <Project>{c19a9d42-2fd0-45fc-ad31-88f55a9dbf5e}</Project>
+      <Name>GuildCars.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EF\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\PagedList.css" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

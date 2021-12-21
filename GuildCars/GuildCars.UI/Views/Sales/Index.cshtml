@@ -1,0 +1,14 @@
+﻿@model List<GuildCars.Models.Queries.VehicleDetail>
+@{
+    ViewBag.Title = "Sales Inventory Results";
+ 
+}
+
+<h2>Sales</h2>
+
+<h2>Search Results</h2>
+
+@foreach (var vehicle in Model)
+{
+    @Html.Partial("_VehicleDetailPartial", vehicle)
+}
